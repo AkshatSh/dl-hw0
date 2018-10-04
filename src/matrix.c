@@ -104,7 +104,21 @@ matrix matmul(matrix a, matrix b)
 {
     matrix c = make_matrix(a.rows, b.cols);
     // TODO: 1.4 - Implement matrix multiplication. Make sure it's fast!
+    assert(a.cols == b.rows);
 
+    
+    for (int row = 0; row < c.rows; row++) {
+        for (int col = 0; col < c.cols; col++) {
+            int index = row * c.cols + col;
+            float sum = 0.0;
+            for (int internal = 0; internal < a.cols; internal++) {
+                int aIndex = row * a.cols + internal;
+                int bIndex = internal * b.cols + col;
+                sum += a.data[aIndex] + b.data[bIndex];
+            }
+            c.data[index] = sum;
+        }
+    }
 
 
     return c;
