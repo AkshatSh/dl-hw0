@@ -52,7 +52,12 @@ matrix copy_matrix(matrix m)
 {
     matrix c = make_matrix(m.rows, m.cols);
     // TODO: 1.1 - Fill in the new matrix
-
+    for (int row = 0; row < m.rows; row++) {
+        for (int col = 0; col < m.cols; col++) {
+            int index = row * m.cols + col;
+            c.data[index] = m.data[index];
+        }
+    }
 
     return c;
 }
