@@ -68,8 +68,14 @@ matrix copy_matrix(matrix m)
 matrix transpose_matrix(matrix m)
 {
     // TODO: 1.2 - Make a matrix the correct size, fill it in
-    matrix t = make_matrix(1,1);
-
+    matrix t = make_matrix(m.cols, m.rows);
+    for (int row = 0; row < m.rows; row++) {
+        for (int col = 0; col < m.cols; col++) {
+            int index = row * m.cols + col;
+            int transposed = col * m.cols + row;
+            t.data[transposed] = m.data[index];
+        }
+    }
 
     return t;
 }
