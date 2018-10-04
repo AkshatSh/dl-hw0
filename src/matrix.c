@@ -120,7 +120,6 @@ matrix matmul(matrix a, matrix b)
         }
     }
 
-
     return c;
 }
 
