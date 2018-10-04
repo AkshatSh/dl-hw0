@@ -45,7 +45,19 @@ void gradient_matrix(matrix m, ACTIVATION a, matrix d)
     for(i = 0; i < m.rows; ++i){
         for(j = 0; j < m.cols; ++j){
             double x = m.data[i*m.cols + j];
+            double gradient = 0.0;
             // TODO: multiply the correct element of d by the gradient
+            if(a == LOGISTIC){
+                gradient = x  * (1.0 - x);
+            } else if (a == RELU){
+                gradient = x > 0 ? 1 : 0;
+            } else if (a == LRELU){
+                gradient = x > 0 ? 1 : 0.1;
+            } else if (a == SOFTMAX){
+                 gradient = 1; // Is this really correct?
+            }
+
+            d.data[i*m.cols + j] = gradient * x;
         }
     }
 }
