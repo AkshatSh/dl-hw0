@@ -72,7 +72,7 @@ matrix transpose_matrix(matrix m)
     for (int row = 0; row < m.rows; row++) {
         for (int col = 0; col < m.cols; col++) {
             int index = row * m.cols + col;
-            int transposed = col * m.cols + row;
+            int transposed = col * m.rows + row;
             t.data[transposed] = m.data[index];
         }
     }
@@ -89,6 +89,12 @@ void axpy_matrix(float a, matrix x, matrix y)
     assert(x.cols == y.cols);
     assert(x.rows == y.rows);
     // TODO: 1.3 - Perform the weighted sum, store result back in y
+    for (int row = 0; row < x.rows; row++) {
+        for (int col = 0; col < x.cols; col++) {
+            int index = row * x.cols + col;
+            y.data[index] += x.data[index] * a;
+        }
+    }
 }
 
 // Perform matrix multiplication a*b, return result
