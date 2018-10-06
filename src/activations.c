@@ -57,7 +57,7 @@ void gradient_matrix(matrix m, ACTIVATION a, matrix d)
                  gradient = 1; // Is this really correct?
             }
 
-            d.data[i*m.cols + j] = gradient * x;
+            d.data[i*m.cols + j] *= gradient * x;
         }
     }
 }

@@ -69,17 +69,29 @@ void backward_connected_layer(layer l, matrix prev_delta)
     // TODO: 3.2
     // delta is the error made by this layer, dL/dout
     // First modify in place to be dL/d(in*w+b) using the gradient of activation
+    gradient_matrix(out, l.activation, delta);
     
     // Calculate the updates for the bias terms using backward_bias
     // The current bias deltas are stored in l.db
+    backward_bias(delta, l.db);
 
     // Then calculate dL/dw. Use axpy to add this dL/dw into any previously stored
     // updates for our weights, which are stored in l.dw
+    matrix xt = transpose_matrix(in);
+    matrix dw = matmul(xt, delta);
+    free_matrix(xt);
+    axpy_matrix(1.0, dw, l.dw);
+    free_matrix(dw);
 
     if(prev_delta.data){
         // Finally, if there is a previous layer to calculate for,
         // calculate dL/d(in). Again, using axpy, add this into the current
         // value we have for the previous layers delta, prev_delta.
+        matrix wt = transpose_matrix(l.w);
+        matrix dx = matmul(delta, wt);
+        free_matrix(wt);
+        axpy_matrix(1.0, dx, prev_delta);
+        free_matrix(dx);
     }
 }
 
