@@ -99,6 +99,9 @@ void backward_connected_layer(layer l, matrix prev_delta)
 void update_connected_layer(layer l, float rate, float momentum, float decay)
 {
     // TODO
+    axpy_matrix(-decay, l.w, l.dw);
+    axpy_matrix(rate, l.dw, l.w);
+    scal_matrix(momentum, l.dw);
 }
 
 layer make_connected_layer(int inputs, int outputs, ACTIVATION activation)
