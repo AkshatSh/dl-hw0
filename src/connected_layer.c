@@ -38,12 +38,11 @@ void backward_bias(matrix delta, matrix db)
 matrix forward_connected_layer(layer l, matrix in)
 {
     // TODO: 3.1 - run the network forward
-    matrix out = copy_matrix(l.b); // Going to want to change this!
+    // matrix out = copy_matrix(l.b); // Going to want to change this!
     matrix w = l.w;
 
-    matrix inw = matmul(in, w);
-
-    axpy_matrix(1.0, inw, out);
+    matrix out = matmul(in, w);
+    forward_bias(out, l.b);
 
     activate_matrix(out, l.activation);
 
