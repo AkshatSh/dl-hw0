@@ -114,7 +114,7 @@ matrix matmul(matrix a, matrix b)
             for (int internal = 0; internal < a.cols; internal++) {
                 int aIndex = row * a.cols + internal;
                 int bIndex = internal * b.cols + col;
-                sum += a.data[aIndex] + b.data[bIndex];
+                sum += (a.data[aIndex] * b.data[bIndex]);
             }
             c.data[index] = sum;
         }
