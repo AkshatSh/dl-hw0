@@ -112,11 +112,11 @@ matrix matmul(matrix a, matrix b)
             int index = row * c.cols + col;
             float sum = 0.0;
             for (int internal = 0; internal < a.cols; internal++) {
-                int aIndex = row * a.cols + internal;
-                int bIndex = internal * b.cols + col;
+                int aIndex = row * a.cols + internal; // a[row][internal]
+                int bIndex = internal * b.cols + col; // b[internal][col]
                 sum += (a.data[aIndex] * b.data[bIndex]);
             }
-            c.data[index] = sum;
+            c.data[index] = sum; // c[row][col]
         }
     }
 
