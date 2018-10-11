@@ -101,6 +101,8 @@ void update_connected_layer(layer l, float rate, float momentum, float decay)
     axpy_matrix(-decay, l.w, l.dw);
     axpy_matrix(rate, l.dw, l.w);
     scal_matrix(momentum, l.dw);
+    axpy_matrix(rate, l.db, l.b);
+    scal_matrix(momentum, l.db);
 }
 
 layer make_connected_layer(int inputs, int outputs, ACTIVATION activation)
