@@ -108,15 +108,13 @@ matrix matmul(matrix a, matrix b)
 
     
     for (int row = 0; row < c.rows; row++) {
-        for (int col = 0; col < c.cols; col++) {
-            int index = row * c.cols + col;
-            float sum = 0.0;
-            for (int internal = 0; internal < a.cols; internal++) {
+        for (int internal = 0; internal < a.cols; internal++) {
+            for (int col = 0; col < c.cols; col++) {
+                int index = row * c.cols + col;
                 int aIndex = row * a.cols + internal; // a[row][internal]
                 int bIndex = internal * b.cols + col; // b[internal][col]
-                sum += (a.data[aIndex] * b.data[bIndex]);
+                c.data[index] += (a.data[aIndex] * b.data[bIndex]);
             }
-            c.data[index] = sum; // c[row][col]
         }
     }
 
