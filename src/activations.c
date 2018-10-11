@@ -55,7 +55,7 @@ void gradient_matrix(matrix m, ACTIVATION a, matrix d)
                 gradient = x > 0 ? 1 : 0.1;
             }
 
-            d.data[i*m.cols + j] *= gradient * x;
+            d.data[i*m.cols + j] *= gradient;
         }
     }
 }
