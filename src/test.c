@@ -63,10 +63,31 @@ void test_matmul() {
     }
 }
 
+void test_transpose_matrix() {
+    matrix matrix_a = make_matrix(3, 2);
+    float a_data[] = {
+        1, 2,
+        3, 4,
+        5, 6,
+    };
+    matrix matrix_a_transpose = make_matrix(2, 3);
+    float a_transpose_data[] = {
+        1, 3, 5,
+        2, 4, 6,
+    };
+    matrix_a.data = a_data;
+    matrix_a_transpose.data = a_transpose_data;
+    matrix res = transpose_matrix(matrix_a);
+    for (int i = 0; i < res.cols * res.rows; i++) {
+        assert(res.data[i] - matrix_a_transpose.data[i] < 0.001);
+    }
+}
+
 void run_tests()
 {
     test_matrix_speed();
     test_matmul();
+    test_transpose_matrix();
     //printf("%d tests, %d passed, %d failed\n", tests_total, tests_total-tests_fail, tests_fail);
 }
 
