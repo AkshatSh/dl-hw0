@@ -59,8 +59,7 @@ void test_matmul() {
     matrix_b.data = b_data;
     matrix matrix_c = matmul(matrix_a, matrix_b);
     for (int i = 0; i < matrix_c.cols * matrix_c.rows; i++) {
-        printf("%d: matrix_c: %f, matrix_expected: %f\n", i, matrix_c.data[i], c_expected_data[i]);
-        assert(matrix_c.data[i] == c_expected_data[i]);
+        assert(matrix_c.data[i] - c_expected_data[i] < 0.001 && matrix_c.data[i] - c_expected_data[i] > -0.001);
     }
 }
 
